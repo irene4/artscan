@@ -1,0 +1,25 @@
+{
+  "name": "artscan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/irenenat/artscan.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/irenenat/artscan/issues"
+  },
+  "homepage": "https://github.com/irenenat/artscan#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  },
+  "dependencies": {
+    "semantic-ui": "^2.4.2"
+  }
+}
