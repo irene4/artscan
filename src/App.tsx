@@ -1,9 +1,10 @@
 import * as React from 'react';
 import HeaderLogo from './HeaderLogo';
 import './App.css';
-import { Button, Icon } from 'semantic-ui-react';
 import MenuBar from './menu';
 import ImportButton from './importButton'
+import Slider from './Slider'
+//import 'caman'
 
 
 export default class App extends React.Component<any, any> {
@@ -11,11 +12,20 @@ export default class App extends React.Component<any, any> {
     super(props);
     this.state = {
       imageURL: null
+      ,brightness: 0
+      ,contrast:0
+      ,saturation: 0
     }
   }
 
   updateImage = (url: string) => {
     this.setState({ imageURL: url })
+  }
+
+  updateEffects = (effect:any, value:any) => {
+    this.setState({
+       [effect]: value
+    })
   }
 
   render() {
@@ -35,10 +45,17 @@ export default class App extends React.Component<any, any> {
         <div id="importbtn">
           {imageURL === null && (<ImportButton updateImage={this.updateImage}></ImportButton>)}
         </div>
-        <img src={imageURL}/>
-        <canvas id="canvas"></canvas>
+        <img id="tempimg" data-caman={`brightness(${this.state["brightness"]}) contrast(${this.state["contrast"]})`} src={imageURL}/>
+        <div id="slider1">
+          <Slider effect="brightness" callbackFunction={this.updateEffects} effectValue={this.state["brightness"]}/>
+          <Slider effect="contrast" callbackFunction={this.updateEffects} effectValue={this.state["contrast"]}/>
+        </div>      
       </div>
     );
   }
 }
 
+//<canvas id="canvas"></canvas>
+        //<div id="sliderContainer">
+        //  <input id="contrast" name="contrast" type="range" min="-10" max="10" value="0"></input>
+        //</div>
