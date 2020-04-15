@@ -1,6 +1,8 @@
 body {
 
   background-color: rgb(22, 22, 22);
+  height:100%;
+  width:100%;
   
   }
 
@@ -9,6 +11,7 @@ body {
   position: fixed;
   top: 25%;
   height: 100vh;
+  z-index: 2;
 }
 
 #importbtn {
@@ -17,7 +20,26 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 0;
 }
+
+#saveOrRemoveBtn {
+  position: fixed;
+  right: 3px;
+  bottom: 3px;
+  z-index: 1;
+}
+
+#image {
+  display: flex;
+  position: fixed;
+  /* height: 85vh; */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
 #tempimg {
   display: flex;
   position: fixed;
@@ -25,6 +47,15 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   object-fit: contain;
+}
+
+#slider {
+  display: flex;
+  position: fixed;
+  top: 43%;
+  transform: translate(-50%, -50%);
+  transform: rotate(-90deg);
+  z-index: 1;
 }
 
 .example {
@@ -50,39 +81,4 @@ body {
   align-items: center;
   height: 100vh;
   width: 100vw;
-}
-
-.slider1 {
-  -webkit-appearance: none;
-  background: red;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

@@ -1,10 +1,12 @@
 import * as React from 'react';
 import HeaderLogo from './HeaderLogo';
 import './App.css';
+import { Loader } from 'semantic-ui-react'
 import MenuBar from './menu';
 import ImportButton from './importButton'
+import SaveOrDelete from './SaveOrDelete'
 import Slider from './Slider'
-//import 'caman'
+import ProcessImage from 'react-imgpro'
 
 
 export default class App extends React.Component<any, any> {
@@ -15,6 +17,8 @@ export default class App extends React.Component<any, any> {
       ,brightness: 0
       ,contrast:0
       ,saturation: 0
+      ,activeItem: null
+      ,isProcessing: false
     }
   }
 
@@ -22,14 +26,39 @@ export default class App extends React.Component<any, any> {
     this.setState({ imageURL: url })
   }
 
-  updateEffects = (effect:any, value:any) => {
+  rmvImg = () => {
     this.setState({
-       [effect]: value
+      imageURL: null
     })
   }
 
+  updateEffects = (effect:any, value:any) => {
+    this.setState({
+      isProcessing: true
+      ,[effect]: value / 100.0
+    })
+  }
+
+  setActive = (item:any) => {
+    this.setState({
+      activeItem: item
+    })
+  }
+
+  auto = () => {
+    this.setState({
+      brightness: .05
+      ,contrast: .15
+      ,activeItem: null
+      ,isProcessing: true
+    })
+  }
+  
   render() {
     const {imageURL} = this.state; // Destructuring the state
+    const {activeItem} = this.state;
+    const {isProcessing} = this.state;
+
     return (
       <div className="App">
         <div style={{
@@ -37,25 +66,56 @@ export default class App extends React.Component<any, any> {
           justifyContent: "center",
           alignItems: "center"
         }}>
-          <HeaderLogo />
+        <HeaderLogo />
         </div>
         <div id="menubar">
-          <MenuBar isEnabled={true} />
+          <MenuBar
+            setActive={this.setActive}
+            activeItem={this.state.activeItem}
+            auto={this.auto}
+            isEnabled={imageURL !== null}
+          />
         </div>
         <div id="importbtn">
-          {imageURL === null && (<ImportButton updateImage={this.updateImage}></ImportButton>)}
+          {imageURL === null && (<ImportButton updateImage={this.updateImage} />)}
         </div>
-        <img id="tempimg" data-caman={`brightness(${this.state["brightness"]}) contrast(${this.state["contrast"]})`} src={imageURL}/>
-        <div id="slider1">
-          <Slider effect="brightness" callbackFunction={this.updateEffects} effectValue={this.state["brightness"]}/>
-          <Slider effect="contrast" callbackFunction={this.updateEffects} effectValue={this.state["contrast"]}/>
-        </div>      
+        {imageURL !== null && isProcessing && (<Loader active inverted id="loader" />)}
+        <div id="container">
+          <div id="image">
+            {imageURL !== null &&
+              (<ProcessImage image={imageURL}
+                brightness={this.state.brightness} 
+                contrast={this.state.contrast}
+                //colors={{saturate: this.state.saturation}}
+                onProcessFinish={() => { //Defined in index.d.ts
+                  this.setState({ isProcessing: false })
+                }}
+              />)}
+            </div>
+          </div>
+        <div id="slider">
+          {activeItem !== null && imageURL !==null &&
+            <Slider effect={this.state.activeItem}
+              callbackFunction={this.updateEffects}
+              effectValue={this.state[this.state.activeItem]}
+            />
+          }
+        </div> 
+        <div id="saveOrRemoveBtn">
+          {imageURL !== null &&
+            (<SaveOrDelete updateImage={this.updateImage}
+              removeEffect={this.updateEffects}
+              setActive={this.setActive}
+            />)}
+        </div>
       </div>
     );
   }
 }
 
+//<Slider effect="contrast" callbackFunction={this.updateEffects} effectValue={this.state["contrast"]}/>
 //<canvas id="canvas"></canvas>
         //<div id="sliderContainer">
         //  <input id="contrast" name="contrast" type="range" min="-10" max="10" value="0"></input>
         //</div>
+        //{imageURL !== null && (<Button id="rmvbtn" circular icon='x' color="red" onClick={(e) => { this.rmvImg() }}/>)}

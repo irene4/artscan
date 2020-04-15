@@ -9,13 +9,8 @@ export default class Slider extends Component<any, any> {
         this.update = this.update.bind(this)
       }
 
-    //update() {
-    //    this.setState(contrast: value);
-    //}
     update = (e:any, value: any) => {
-        //this.setState({ contrast: value.value })
         this.props.callbackFunction(this.props.effect, parseInt(value.value))
-        //console.log(value.value)
       }
 
     render() {
@@ -23,14 +18,13 @@ export default class Slider extends Component<any, any> {
 
         return (
             <Form.Input
-              //label="Value"
               min={-50}
               max={50}
-              //name='Contrast'
+              //label={this.props.effect}
               onChange={this.update}
-              step={1}
+              step={5}
               type='range'
-              value={this.props.effectValue}
+              value={this.props.effectValue*100}
               />
               )
             }

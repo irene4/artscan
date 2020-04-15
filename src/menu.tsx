@@ -5,10 +5,24 @@ interface Props {
     isEnabled: boolean;
 }
 
-export default class MenuBar extends React.Component<Props, never> {
+export default class MenuBar extends React.Component<any, any> {
+    //<Props, never> {
+    //state = { activeItem: '' }
 
     constructor(props: Props) {
         super(props);
+    }
+
+    handleClick = (e:any, name:any) => {
+        if(this.props.isEnabled) {
+            if(this.props.activeItem !== name.name) {
+                this.props.setActive(name.name)
+            }
+            else {
+                const none = null;
+                this.props.setActive(none) 
+            }
+        }
     }
 
     public render() {
@@ -20,19 +34,38 @@ export default class MenuBar extends React.Component<Props, never> {
         return (
             <div>
                 
-                        <Menu icon vertical>
+                        <Menu color='yellow' icon vertical>
                         
-                            <Menu.Item name='auto'>
+                            <Menu.Item
+                                name='auto'
+                                data-tooltip="Auto" data-position="right center"
+                                active={this.props.activeItem === 'auto'}
+                                onClick={this.props.auto}
+                            >
                                 <Icon name='magic' />
                             </Menu.Item>
-                            <Menu.Item name='crop'>
-                                <Icon name='expand' />
+                            <Menu.Item
+                                name='brightness'
+                                data-tooltip="Brightness" data-position="right center"
+                                active={this.props.activeItem === 'brightness'}
+                                onClick={this.handleClick}
+                            >
+                                <Icon name='sun outline' />
                             </Menu.Item>
-                            <Menu.Item name='saturation'>
-                                <Icon name='sliders horizontal' />
-                            </Menu.Item>
-                            <Menu.Item name='contrast'>
+                            <Menu.Item
+                                name='contrast'
+                                data-tooltip="Contrast" data-position="right center"
+                                active={this.props.activeItem === 'contrast'}
+                                onClick={this.handleClick}
+                            >
                                 <Icon name='adjust' />
+                            </Menu.Item>
+                            <Menu.Item
+                                name='saturation'
+                                active={this.props.activeItem === 'saturation'}
+                                onClick={this.handleClick}
+                            >
+                                <Icon name='sliders horizontal' />
                             </Menu.Item>
                             <Menu.Item name='temperature'>
                                 <Icon name='tint' />
@@ -40,8 +73,8 @@ export default class MenuBar extends React.Component<Props, never> {
                             <Menu.Item name='filter'>
                                 <Icon name='filter' />
                             </Menu.Item>
-                            <Menu.Item name='color select'>
-                                <Icon name='eye dropper' />
+                            <Menu.Item name='crop'>
+                                <Icon name='expand' />
                             </Menu.Item>
                             <Menu.Item name='edit'>
                                 <Icon name='edit' />
