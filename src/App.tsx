@@ -6,6 +6,7 @@ import MenuBar from './components/menu';
 import ImportButton from './components/importButton';
 import SaveOrDelete from './components/SaveOrDelete';
 import Slider from './components/Slider';
+import Canvas from './components/Canvas';
 import ProcessImage from 'react-imgpro';
 
 export default class App extends React.Component<any, any> {
@@ -77,16 +78,17 @@ export default class App extends React.Component<any, any> {
 				<div id="container">
 					<div id="image">
 						{imageURL !== null && (
-							<ProcessImage
-								image={imageURL}
-								brightness={this.state.brightness}
-								contrast={this.state.contrast}
-								//colors={{saturate: this.state.saturation}}
-								onProcessFinish={() => {
-									//Defined in index.d.ts
-									this.setState({ isProcessing: false });
-								}}
-							/>
+							// <ProcessImage
+							// 	image={imageURL}
+							// 	brightness={this.state.brightness}
+							// 	contrast={this.state.contrast}
+							// 	//colors={{saturate: this.state.saturation}}
+							// 	onProcessFinish={() => {
+							// 		//Defined in index.d.ts
+							// 		this.setState({ isProcessing: false });
+							// 	}}
+							// />
+							<Canvas />
 						)}
 					</div>
 				</div>
