@@ -60,23 +60,23 @@ export default class MenuBar extends React.Component<any, any> {
                             >
                                 <Icon name='adjust' />
                             </Menu.Item>
-                            <Menu.Item
+                            <Menu.Item disabled
                                 name='saturation'
                                 active={this.props.activeItem === 'saturation'}
                                 onClick={this.handleClick}
                             >
                                 <Icon name='sliders horizontal' />
                             </Menu.Item>
-                            <Menu.Item name='temperature'>
+                            <Menu.Item disabled name='temperature'>
                                 <Icon name='tint' />
                             </Menu.Item>
-                            <Menu.Item name='filter'>
+                            <Menu.Item disabled name='filter'>
                                 <Icon name='filter' />
                             </Menu.Item>
-                            <Menu.Item name='crop'>
+                            <Menu.Item disabled name='crop'>
                                 <Icon name='expand' />
                             </Menu.Item>
-                            <Menu.Item name='edit'>
+                            <Menu.Item disabled name='edit'>
                                 <Icon name='edit' />
                             </Menu.Item>
                         </Menu>

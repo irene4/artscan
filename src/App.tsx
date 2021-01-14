@@ -58,6 +58,9 @@ export default class App extends React.Component<any, any> {
 		const { imageURL } = this.state; // Destructuring the state
 		const { activeItem } = this.state;
 		const { isProcessing } = this.state;
+		const canvasProps = {
+			imageURL: imageURL
+		}
 
 		return (
 			<div className="App">
@@ -88,7 +91,7 @@ export default class App extends React.Component<any, any> {
 							// 		this.setState({ isProcessing: false });
 							// 	}}
 							// />
-							<Canvas />
+							<Canvas {...imageURL} />
 						)}
 					</div>
 				</div>
