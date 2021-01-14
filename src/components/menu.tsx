@@ -80,8 +80,6 @@ export default class MenuBar extends React.Component<any, any> {
                                 <Icon name='edit' />
                             </Menu.Item>
                         </Menu>
-                    
-
             </div>
         );
     }

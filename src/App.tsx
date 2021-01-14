@@ -81,17 +81,17 @@ export default class App extends React.Component<any, any> {
 				<div id="container">
 					<div id="image">
 						{imageURL !== null && (
-							// <ProcessImage
-							// 	image={imageURL}
-							// 	brightness={this.state.brightness}
-							// 	contrast={this.state.contrast}
-							// 	//colors={{saturate: this.state.saturation}}
-							// 	onProcessFinish={() => {
-							// 		//Defined in index.d.ts
-							// 		this.setState({ isProcessing: false });
-							// 	}}
-							// />
-							<Canvas {...imageURL} />
+							<ProcessImage
+								image={imageURL}
+								brightness={this.state.brightness}
+								contrast={this.state.contrast}
+								//colors={{saturate: this.state.saturation}}
+								onProcessFinish={() => {
+									//Defined in index.d.ts
+									this.setState({ isProcessing: false });
+								}}
+							/>
+							// <Canvas imageURL={imageURL} />
 						)}
 					</div>
 				</div>

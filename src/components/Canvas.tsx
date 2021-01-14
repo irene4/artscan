@@ -1,30 +1,38 @@
 import React, {useRef, useEffect} from 'react';
 
-    interface CanvasProps {
-        imgURL: string;
-    }
+interface CanvasProps {
+    imageURL: string;
+}
 
 function Canvas(prop: CanvasProps) {
 
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    // interface Canvas {
-    //     imgURL: string;
-    // }
+    const ctxRef = useRef<any>(null);
+    let style = {}
 
     useEffect(() => {
         if(canvasRef.current){
             const canvas = canvasRef.current;
             const context = canvas.getContext('2d');
-            canvas.width = 200;
-            canvas.height = 200;
-            canvas.style.width = "200px";
-            canvas.style.height = "200px";
+            
+            let img = new Image();
+            img.onload = function(){
+                canvas.width = img.width;
+                canvas.height = img.height;
+                //canvas.style.width = `${window.innerWidth}px`;
+                //canvas.style.height = `${window.innerHeight}px`;
+
+                context?.drawImage(img, 0, 0, img.width, img.height);
+            }
+            img.src = prop.imageURL;
+            ctxRef.current = context;
         }
     }, [])
 
     return (
         <canvas 
             ref={canvasRef}
+            style={{'height': '80vh'}}
         />
     );
 }
