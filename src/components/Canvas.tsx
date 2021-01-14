@@ -1,8 +1,15 @@
 import React, {useRef, useEffect} from 'react';
 
-function Canvas() {
+    interface CanvasProps {
+        imgURL: string;
+    }
+
+function Canvas(prop: CanvasProps) {
 
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    // interface Canvas {
+    //     imgURL: string;
+    // }
 
     useEffect(() => {
         if(canvasRef.current){
