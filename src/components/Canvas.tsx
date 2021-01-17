@@ -19,6 +19,7 @@ function Canvas(prop: CanvasProps) {
             img.onload = function(){
                 canvas.width = img.width;
                 canvas.height = img.height;
+                canvas.style.height = '80vh';
                 //canvas.style.width = `${window.innerWidth}px`;
                 //canvas.style.height = `${window.innerHeight}px`;
 
@@ -30,10 +31,7 @@ function Canvas(prop: CanvasProps) {
     }, [])
 
     return (
-        <canvas 
-            ref={canvasRef}
-            style={{'height': '80vh'}}
-        />
+        <canvas ref={canvasRef} />
     );
 }
 
